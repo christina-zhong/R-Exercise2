@@ -1,0 +1,7 @@
+data<-read.table("household_power_consumption.txt", header=TRUE,sep=";", na.strings="?",colClasses=c(rep("character",2),"numeric",rep("NULL",6)))
+gap <- subset(data,Date %in% c("2/1/2007","2/2/2007"))
+gap$datetime <- strptime(paste(gap$Date,gap$Time,sep=" "),format='%m/%d/%Y %H:%M:%S')
+par(mar=c(5.1,5.1,4.1,2.1))
+with(gap,plot(datetime,Global_active_power,type="l",xlab="",ylab="Global Active Power (kilowatts)"))
+dev.copy(device=png,file="plot2.png",width=480,height=480)
+dev.off()
